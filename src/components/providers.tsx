@@ -38,7 +38,7 @@ function LoadingScreen() {
               <img
                 src="/logo.png"
                 alt=""
-                className="mx-auto h-24 w-24 object-contain md:h-28 md:w-28"
+                className="mx-auto h-24 w-24 rounded-full object-cover md:h-28 md:w-28"
               />
             </motion.div>
             <motion.p

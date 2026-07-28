@@ -16,14 +16,21 @@ export function Logo({ className, priority = false, href = "/" }: LogoProps) {
       width={88}
       height={88}
       priority={priority}
-      className={cn("h-10 w-10 object-contain md:h-11 md:w-11", className)}
+      className={cn(
+        "h-10 w-10 rounded-full object-cover md:h-11 md:w-11",
+        className
+      )}
     />
   );
 
   if (!href) return image;
 
   return (
-    <Link href={href} className="focus-ring inline-flex items-center rounded-lg">
+    <Link
+      href={href}
+      className="focus-ring inline-flex shrink-0 items-center rounded-full"
+      aria-label="Webworks Collective home"
+    >
       {image}
     </Link>
   );

@@ -117,7 +117,7 @@ export function HeroSection() {
   return (
     <section
       ref={ref}
-      className="relative min-h-[100svh] overflow-hidden pt-28 pb-16 md:pt-32"
+      className="relative overflow-hidden pt-24 pb-10 md:pt-28 md:pb-12 lg:pt-32 lg:pb-16"
     >
       <div className="absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(37,99,235,0.28),_transparent_55%)]" />
@@ -126,10 +126,10 @@ export function HeroSection() {
       </div>
 
       <motion.div style={{ y, opacity }} className="container-premium">
-        <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-8">
+        <div className="grid items-center gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10">
           <div>
             <motion.p
-              className="mb-5 text-xs uppercase tracking-[0.18em] text-primary-light md:text-sm leading-relaxed pb-1"
+              className="mb-3 text-xs uppercase tracking-[0.18em] text-primary-light md:text-sm leading-relaxed pb-1"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
@@ -138,7 +138,7 @@ export function HeroSection() {
             </motion.p>
 
             <motion.h1
-              className="font-display text-4xl font-semibold leading-[1.15] text-white sm:text-5xl md:text-6xl lg:text-[4.25rem] pb-1 overflow-visible"
+              className="font-display text-4xl font-semibold leading-[1.15] text-white sm:text-5xl md:text-6xl lg:text-[3.75rem] pb-1 overflow-visible"
               initial={{ opacity: 0, y: 28 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.08 }}
@@ -148,7 +148,7 @@ export function HeroSection() {
             </motion.h1>
 
             <motion.p
-              className="mt-6 max-w-xl text-base leading-relaxed text-muted md:text-lg"
+              className="mt-4 max-w-xl text-base leading-relaxed text-muted md:text-lg"
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.16 }}
@@ -159,7 +159,7 @@ export function HeroSection() {
             </motion.p>
 
             <motion.div
-              className="mt-8 flex flex-wrap gap-3"
+              className="mt-6 flex flex-wrap gap-3"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.24 }}
@@ -180,7 +180,7 @@ export function HeroSection() {
           </div>
 
           <motion.div
-            className="relative mx-auto w-full max-w-xl"
+            className="relative mx-auto w-full max-w-lg lg:max-w-xl"
             initial={{ opacity: 0, scale: 0.94 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.9, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
@@ -242,9 +242,9 @@ export function TrustedBySection() {
   const logos = [...trustedLogos, ...trustedLogos];
 
   return (
-    <section className="section-padding border-y border-white/6 py-12 md:py-16" aria-label="Trusted by">
+    <section className="border-y border-white/6 py-8 md:py-10" aria-label="Trusted by">
       <div className="container-premium">
-        <p className="mb-8 text-center text-xs uppercase tracking-[0.16em] text-muted leading-relaxed pb-1">
+        <p className="mb-5 text-center text-xs uppercase tracking-[0.16em] text-muted leading-relaxed pb-1">
           Trusted by growing brands
         </p>
         <div className="relative overflow-hidden py-1">

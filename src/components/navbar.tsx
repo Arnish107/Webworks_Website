@@ -29,7 +29,7 @@ export function Navbar() {
     <header
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-all duration-300",
-        scrolled ? "py-3" : "py-5"
+        scrolled ? "py-2.5" : "py-3"
       )}
     >
       <div className="container-premium">
