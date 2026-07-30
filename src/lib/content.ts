@@ -203,9 +203,9 @@ export const whyChooseUs: {
   icon: LucideIcon;
 }[] = [
   {
-    title: "2 to 4 week launches",
+    title: "1 to 2 week launches",
     description:
-      "Most brochure sites ship in two to four weeks once we have your copy, photos, and logo. You see a live staging link by the end of week one.",
+      "Most brochure sites ship in one to two weeks once we have your copy, photos, and logo. You see a live staging link early in the build.",
     icon: Clock3,
   },
   {
@@ -451,7 +451,7 @@ export const faqs = [
   {
     question: "How long does a typical website project take?",
     answer:
-      "Starter and Professional marketing sites usually take 2 to 4 weeks after we have your logo, photos, and copy. If content is still being written, that becomes the bottleneck, not the build. Larger e-commerce or multi-location projects get a dated milestone schedule in the proposal.",
+      "Starter and Professional marketing sites usually take 1 to 2 weeks after we have your logo, photos, and copy. If content is still being written, that becomes the bottleneck, not the build. Larger e-commerce or multi-location projects get a dated milestone schedule in the proposal.",
   },
   {
     question: "Do you work with businesses outside of tech?",
@@ -513,9 +513,9 @@ export const team = [
 ];
 
 export const stats = [
-  { value: 8, suffix: "+", label: "Client sites shipped" },
+  { value: 50, suffix: "+", label: "Client sites shipped" },
   { value: 3, suffix: "", label: "Founders you actually talk to" },
-  { value: 2, suffix: "-4 wks", label: "Typical launch window" },
+  { value: 1, suffix: "-2 wks", label: "Typical launch window" },
 ];
 
 export const portfolioCategories: Array<ProjectCategory | "All"> = [
