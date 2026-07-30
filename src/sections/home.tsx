@@ -371,7 +371,6 @@ export function PortfolioSection() {
                     src={project.image}
                     alt={project.imageAlt}
                     title={project.title}
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                   <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0B1220] via-transparent to-transparent opacity-80" />
                 </div>

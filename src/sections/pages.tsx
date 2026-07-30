@@ -440,7 +440,6 @@ export function PortfolioPage() {
                       src={project.image}
                       alt={project.imageAlt}
                       title={project.title}
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0B1220] via-transparent to-transparent opacity-80" />
                     <span className="absolute left-4 top-4 rounded-full bg-black/40 px-3 py-1 text-xs uppercase tracking-[0.14em] text-white backdrop-blur">
