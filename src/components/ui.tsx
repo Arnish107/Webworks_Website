@@ -94,10 +94,14 @@ export const AccordionContent = React.forwardRef<
 >(({ className, children, ...props }, ref) => (
   <AccordionPrimitive.Content
     ref={ref}
-    className="overflow-hidden text-sm md:text-base text-muted data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
+    className={cn(
+      "overflow-hidden text-sm md:text-base text-muted",
+      "data-[state=closed]:hidden data-[state=open]:block",
+      className
+    )}
     {...props}
   >
-    <div className={cn("pb-5 pt-0 leading-relaxed", className)}>{children}</div>
+    <div className="pb-5 pt-0 leading-relaxed text-muted-strong">{children}</div>
   </AccordionPrimitive.Content>
 ));
 AccordionContent.displayName = AccordionPrimitive.Content.displayName;

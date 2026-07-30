@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import {
@@ -29,6 +28,7 @@ import {
   Reveal,
   SectionHeading,
 } from "@/components/ui";
+import { ProjectThumb } from "@/components/project-thumb";
 import {
   cn,
   faqs,
@@ -44,20 +44,17 @@ import {
 
 const floatingSites = [
   {
-    src: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
-    alt: "Analytics dashboard website preview",
+    label: "Menu + hours",
     className: "left-[-8%] top-[8%] w-[38%] rotate-[-8deg]",
     delay: 0.35,
   },
   {
-    src: "https://images.unsplash.com/photo-1522542550221-31fd19575a2d?auto=format&fit=crop&w=800&q=80",
-    alt: "Creative agency website preview",
+    label: "Mobile booking",
     className: "right-[-6%] top-[2%] w-[34%] rotate-[7deg]",
     delay: 0.5,
   },
   {
-    src: "https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=800&q=80",
-    alt: "Product design website preview",
+    label: "Local SEO",
     className: "right-[2%] bottom-[6%] w-[36%] rotate-[-4deg]",
     delay: 0.65,
   },
@@ -144,7 +141,7 @@ export function HeroSection() {
               transition={{ duration: 0.7, delay: 0.08 }}
             >
               Building Websites That{" "}
-              <span className="text-gradient">Build Businesses</span>
+              <span className="text-gradient">Get Local Customers</span>
             </motion.h1>
 
             <motion.p
@@ -153,9 +150,9 @@ export function HeroSection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.16 }}
             >
-              We design and develop premium digital experiences for ambitious
-              brands: sites that look exceptional, load fast, and convert with
-              intention.
+              We are a three-person studio in Cumming, GA. We build Next.js sites
+              for restaurants, clinics, and local service businesses that need
+              clearer pages, faster phones, and a site their staff can update.
             </motion.p>
 
             <motion.div
@@ -188,20 +185,18 @@ export function HeroSection() {
             <div className="relative aspect-[4/3]">
               {floatingSites.map((site) => (
                 <motion.div
-                  key={site.alt}
-                  className={`absolute overflow-hidden rounded-2xl border border-white/15 shadow-2xl shadow-black/40 ${site.className}`}
+                  key={site.label}
+                  className={`absolute overflow-hidden rounded-2xl border border-white/15 bg-[#111827]/90 p-4 shadow-2xl shadow-black/40 ${site.className}`}
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: site.delay }}
                 >
-                  <Image
-                    src={site.src}
-                    alt={site.alt}
-                    width={640}
-                    height={420}
-                    className="h-full w-full object-cover"
-                    sizes="(max-width: 768px) 45vw, 280px"
-                  />
+                  <div className="mb-3 h-2 w-1/2 rounded-full bg-white/10" />
+                  <div className="mb-2 h-2 w-3/4 rounded-full bg-white/10" />
+                  <div className="h-16 rounded-lg bg-primary/20" />
+                  <p className="mt-3 text-[11px] uppercase tracking-[0.14em] text-primary-light">
+                    {site.label}
+                  </p>
                 </motion.div>
               ))}
 
@@ -217,16 +212,13 @@ export function HeroSection() {
                     <span className="h-2 w-2 rounded-full bg-amber-400/80" />
                     <span className="h-2 w-2 rounded-full bg-emerald-400/80" />
                   </div>
-                  <div className="overflow-hidden rounded-xl">
-                    <Image
-                      src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1400&q=80"
-                      alt="Laptop displaying a modern website build"
-                      width={900}
-                      height={600}
-                      priority
-                      className="aspect-[16/10] w-full object-cover"
-                      sizes="(max-width: 1024px) 70vw, 420px"
-                    />
+                  <div className="flex aspect-[16/10] flex-col justify-end overflow-hidden rounded-xl bg-gradient-to-br from-[#1e3a8a]/60 to-[#0B1220] p-5">
+                    <p className="text-xs uppercase tracking-[0.16em] text-primary-light">
+                      Staging preview
+                    </p>
+                    <p className="mt-2 font-display text-xl font-semibold text-white">
+                      Your site, live on a private link before launch
+                    </p>
                   </div>
                 </div>
               </motion.div>
@@ -239,28 +231,22 @@ export function HeroSection() {
 }
 
 export function TrustedBySection() {
-  const logos = [...trustedLogos, ...trustedLogos];
-
   return (
     <section className="border-y border-white/6 py-8 md:py-10" aria-label="Trusted by">
       <div className="container-premium">
         <p className="mb-5 text-center text-xs uppercase tracking-[0.16em] text-muted leading-relaxed pb-1">
-          Trusted by growing brands
+          Clients we have built for
         </p>
-        <div className="relative overflow-hidden py-1">
-          <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-background to-transparent" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-background to-transparent" />
-          <div className="flex w-max animate-marquee gap-6 md:gap-10">
-            {logos.map((logo, index) => (
-              <div
-                key={`${logo}-${index}`}
-                className="flex min-h-12 min-w-max items-center justify-center rounded-full border border-white/8 bg-white/[0.03] px-5 py-3 text-sm font-medium tracking-normal text-muted-strong whitespace-nowrap leading-normal"
-              >
-                {logo}
-              </div>
-            ))}
-          </div>
-        </div>
+        <ul className="flex flex-wrap items-center justify-center gap-3 md:gap-4">
+          {trustedLogos.map((logo) => (
+            <li
+              key={logo}
+              className="rounded-full border border-white/8 bg-white/[0.03] px-4 py-2.5 text-sm font-medium text-muted-strong"
+            >
+              {logo}
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );
@@ -273,8 +259,8 @@ export function ServicesSection() {
         <Reveal>
           <SectionHeading
             eyebrow="Services"
-            title="Everything your brand needs to show up stronger online"
-            description="From first impression to ongoing growth, we cover the full spectrum of modern web craft."
+            title="What we actually take on"
+            description="Design, build, SEO, and maintenance for local businesses. No bloated retainers unless you ask for one."
           />
         </Reveal>
 
@@ -315,9 +301,9 @@ export function WhyChooseUsSection() {
       <div className="container-premium">
         <Reveal>
           <SectionHeading
-            eyebrow="Why Choose Us"
-            title="A partner built for clarity, speed, and lasting quality"
-            description="We combine premium design taste with engineering discipline, so your website becomes a business asset, not a liability."
+            eyebrow="Why work with us"
+            title="What is different about this studio"
+            description="Four specifics you can hold us to, not a generic agency checklist."
           />
         </Reveal>
 
@@ -370,9 +356,9 @@ export function PortfolioSection() {
       <div className="container-premium">
         <Reveal>
           <SectionHeading
-            eyebrow="Portfolio"
-            title="Selected work that looks sharp and works harder"
-            description="A glimpse into the brands we’ve helped clarify, elevate, and convert."
+            eyebrow="Work"
+            title="Sites we have shipped for real clients"
+            description="Sites we have shipped for real clients. Temporary preview images until final screenshots are ready."
           />
         </Reveal>
 
@@ -381,14 +367,13 @@ export function PortfolioSection() {
             <Reveal key={project.id} delay={index * 0.05}>
               <article className="group glass hover-glow overflow-hidden rounded-3xl">
                 <div className="relative aspect-[4/3] overflow-hidden">
-                  <Image
+                  <ProjectThumb
                     src={project.image}
                     alt={project.imageAlt}
-                    fill
-                    className="object-cover transition duration-700 group-hover:scale-105"
+                    title={project.title}
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0B1220] via-transparent to-transparent opacity-80" />
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0B1220] via-transparent to-transparent opacity-80" />
                 </div>
                 <div className="p-5 md:p-6">
                   <p className="text-xs uppercase tracking-[0.18em] text-primary-light">
@@ -428,9 +413,9 @@ export function ProcessSection() {
       <div className="container-premium">
         <Reveal>
           <SectionHeading
-            eyebrow="Process"
-            title="A clear path from idea to launch"
-            description="Four focused stages. No mystery, no endless revisions without direction."
+            eyebrow="How we work"
+            title="From first call to DNS cutover"
+            description="A concrete sequence with timeboxes. No vague discovery theater."
           />
         </Reveal>
 
@@ -473,9 +458,9 @@ export function TestimonialsSection() {
       <div className="container-premium">
         <Reveal>
           <SectionHeading
-            eyebrow="Testimonials"
-            title="Clients who trusted us with their next chapter"
-            description="Real partnerships. Real outcomes. Words from the people we build with."
+            eyebrow="Client notes"
+            title="What owners told us after launch"
+            description="Short and specific. We only publish quotes we can attribute."
           />
         </Reveal>
 
@@ -562,8 +547,8 @@ export function PricingSection() {
         <Reveal>
           <SectionHeading
             eyebrow="Pricing"
-            title="Transparent packages for every stage of growth"
-            description="Choose a starting point, or tell us what you need and we will shape a custom engagement."
+            title="Published numbers, not mystery retainers"
+            description="Starter and Professional are fixed. Enterprise and Maintenance are scoped so you are not surprised."
           />
         </Reveal>
 
@@ -629,8 +614,8 @@ export function FaqSection() {
         <Reveal>
           <SectionHeading
             eyebrow="FAQ"
-            title="Answers before we get started"
-            description="Straight talk about timelines, process, and what working together looks like."
+            title="Straight answers before you email us"
+            description="Timelines, payments, redesigns, and what happens after launch."
           />
         </Reveal>
 
@@ -658,15 +643,15 @@ export function CtaSection() {
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(59,130,246,0.25),_transparent_55%)]" />
             <div className="relative">
               <p className="text-xs uppercase tracking-[0.22em] text-primary-light">
-                Ready when you are
+                Cumming, GA
               </p>
               <h2 className="mx-auto mt-4 max-w-3xl font-display text-3xl font-semibold leading-tight text-white md:text-5xl">
-                Let’s build a website your business can grow into
+                Tell us what the site needs to do for your business
               </h2>
               <p className="mx-auto mt-5 max-w-2xl text-muted md:text-lg">
-                Tell us where you are and where you want to go. We’ll map the
-                clearest path to a digital presence that feels premium and
-                performs.
+                Send a short note about your business, current site (if any), and
+                timeline. We reply within one business day with fit, rough
+                timing, and next steps.
               </p>
               <div className="mt-8 flex flex-wrap justify-center gap-3">
                 <Button asChild size="lg">

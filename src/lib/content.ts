@@ -8,10 +8,9 @@ import {
   Workflow,
   Search,
   Wrench,
-  Zap,
-  Smartphone,
-  Shield,
-  BadgeDollarSign,
+  Clock3,
+  MapPin,
+  MessagesSquare,
   Headphones,
   type LucideIcon,
 } from "lucide-react";
@@ -20,12 +19,15 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+/**
+ * Live host for canonical / Open Graph. Override with NEXT_PUBLIC_SITE_URL if needed.
+ */
 export const siteConfig = {
   name: "Webworks Collective",
-  tagline: "Building Websites That Build Businesses",
+  tagline: "Websites for local businesses that need more calls, not more fluff",
   description:
-    "Webworks Collective designs and develops premium websites, e-commerce platforms, and digital experiences that help ambitious brands grow with confidence.",
-  url: "https://webworkscollective.com",
+    "Webworks Collective is a Cumming, GA web studio building sites for restaurants, clinics, and local service businesses. Next.js builds, clear pricing, and support after launch.",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://webworks-website.vercel.app",
   email: "webworkscollective887@gmail.com",
   phone: "7706781114",
   address: "Cumming, GA",
@@ -35,7 +37,7 @@ export const siteConfig = {
     instagram: "https://instagram.com/webworkscollective",
     dribbble: "https://dribbble.com/webworkscollective",
   },
-} as const;
+};
 
 export const navLinks = [
   { href: "/", label: "Home" },
@@ -75,8 +77,6 @@ export type Service = {
   description: string;
   features: string[];
   icon: LucideIcon;
-  image: string;
-  imageAlt: string;
 };
 
 export type ProjectCategory =
@@ -91,9 +91,11 @@ export type Project = {
   title: string;
   category: ProjectCategory;
   description: string;
+  /** Drop a real screenshot at this path (PNG/JPG preferred). */
   image: string;
   imageAlt: string;
   tags: string[];
+  liveUrl?: string;
 };
 
 export const services: Service[] = [
@@ -101,115 +103,97 @@ export const services: Service[] = [
     id: "website-design",
     title: "Website Design",
     shortDescription:
-      "Distinctive visual systems and interfaces that make your brand impossible to ignore.",
+      "Layouts built around how your customers actually decide: menus, services, hours, and the next click.",
     description:
-      "We craft premium digital identities, from brand-aligned layouts to pixel-perfect UI, that feel intentional, modern, and unmistakably yours. Every screen is designed for clarity, conversion, and lasting impression.",
+      "We design for local businesses first. That means clear hierarchy, readable type on phones, and pages structured around calls, reservations, and form fills, not just looking nice in a mockup.",
     features: [
-      "Brand-aligned visual systems",
-      "High-fidelity UI design",
-      "Interactive prototypes",
-      "Design systems and component libraries",
-      "Accessibility-first interfaces",
+      "Mobile-first page layouts",
+      "Brand colors and typography that match your space",
+      "Clickable Figma review before we build",
+      "Reusable components so future pages stay consistent",
+      "Accessible contrast and focus states",
     ],
     icon: Globe,
-    image:
-      "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=1600&q=80",
-    imageAlt: "Designer reviewing a modern website layout on a large display",
   },
   {
     id: "website-development",
     title: "Website Development",
     shortDescription:
-      "Fast, scalable, production-ready websites engineered for performance and growth.",
+      "Next.js sites hosted on Vercel: fast loads, clean code, easy for us to maintain later.",
     description:
-      "From marketing sites to complex web applications, we build with modern frameworks, clean architecture, and ruthless attention to speed. Your site launches polished and stays ready to scale.",
+      "We ship on Next.js with TypeScript. You get a site that scores well on Core Web Vitals, updates without fighting a clunky page builder, and can grow into bookings, menus, or a CMS when you need it.",
     features: [
-      "Next.js and modern stack builds",
-      "CMS integrations",
-      "API and third-party connections",
-      "Performance optimization",
-      "Ongoing technical maintenance",
+      "Next.js + TypeScript builds",
+      "Vercel hosting and SSL",
+      "Forms wired to your inbox",
+      "Analytics setup (GA4 or Plausible)",
+      "Hand-off notes for anything you edit yourself",
     ],
     icon: Code2,
-    image:
-      "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1600&q=80",
-    imageAlt: "Developer writing clean code on a dual-monitor workstation",
   },
   {
     id: "e-commerce",
     title: "E-Commerce",
     shortDescription:
-      "Conversion-focused online stores that turn browsers into loyal customers.",
+      "Product pages and checkout flows for shops that need to sell without babysitting the site.",
     description:
-      "We design and develop e-commerce experiences that feel effortless: beautiful product storytelling, frictionless checkout, and infrastructure built for real revenue.",
+      "From simple Shopify themes to custom storefronts, we focus on the boring stuff that makes money: clear product detail, trust signals, and a checkout path that does not lose people on mobile.",
     features: [
-      "Custom storefronts",
-      "Shopify and headless commerce",
-      "Payment and inventory integrations",
-      "Conversion-focused UX",
-      "Analytics and growth tooling",
+      "Shopify or custom storefronts",
+      "Product catalog structure",
+      "Payments and shipping basics",
+      "Mobile checkout polish",
+      "Post-launch product add support",
     ],
     icon: ShoppingCart,
-    image:
-      "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1600&q=80",
-    imageAlt: "Customer browsing products on a modern e-commerce website",
   },
   {
     id: "business-automation",
     title: "Business Automation",
     shortDescription:
-      "Smart workflows that reclaim your time and tighten every operational loop.",
+      "Connect forms, calendars, and CRMs so leads do not die in your spam folder.",
     description:
-      "We connect the tools you already use, and build the ones you are missing, so leads, invoices, bookings, and follow-ups move on autopilot while your team focuses on what matters.",
+      "If you are copying inquiry emails into a spreadsheet, we can fix that. We wire booking tools, follow-up emails, and simple automations so your team spends time on customers, not busywork.",
     features: [
-      "CRM and marketing automation",
-      "Booking and scheduling systems",
-      "Custom internal tools",
-      "Zapier / Make integrations",
-      "Reporting dashboards",
+      "Form to email / CRM routing",
+      "Booking and scheduling tools",
+      "Zapier or Make workflows",
+      "Internal status dashboards",
+      "Light training for your staff",
     ],
     icon: Workflow,
-    image:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1600&q=80",
-    imageAlt: "Analytics dashboard showing automated business workflows",
   },
   {
     id: "seo",
     title: "SEO",
     shortDescription:
-      "Technical and content strategy that puts your business where buyers are searching.",
+      "Local SEO setup so people searching Cumming and nearby cities can actually find you.",
     description:
-      "Search visibility is not luck. It is structure, speed, and substance. We audit, optimize, and continuously refine so the right people find you at the right moment.",
+      "We handle the technical baseline every site needs: titles, meta, sitemap, speed, and Google Business Profile alignment. Content strategy is available when you are ready to publish more than a homepage.",
     features: [
-      "Technical SEO audits",
-      "On-page optimization",
-      "Local SEO strategy",
-      "Content architecture",
-      "Performance and Core Web Vitals",
+      "Technical SEO checklist on launch",
+      "Local keyword targeting",
+      "Google Business Profile guidance",
+      "On-page titles and headings",
+      "Core Web Vitals tuning",
     ],
     icon: Search,
-    image:
-      "https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?auto=format&fit=crop&w=1600&q=80",
-    imageAlt: "SEO analytics charts on a laptop screen",
   },
   {
     id: "website-maintenance",
     title: "Website Maintenance",
     shortDescription:
-      "Proactive care that keeps your site secure, fast, and always current.",
+      "Monthly updates, backups, and fixes so your site does not quietly rot after launch.",
     description:
-      "Launch day is just the beginning. Our maintenance plans cover updates, monitoring, backups, and iterative improvements so your digital presence stays sharp year-round.",
+      "Launch is not the finish line. Our maintenance plans cover dependency updates, uptime checks, small content edits, and a human to message when something breaks on a Friday night.",
     features: [
-      "Security monitoring",
-      "Software and plugin updates",
-      "Automated backups",
-      "Uptime and performance checks",
-      "Priority support",
+      "Dependency and security updates",
+      "Weekly backup verification",
+      "Uptime monitoring",
+      "Small content changes each month",
+      "Same-day response on urgent outages",
     ],
     icon: Wrench,
-    image:
-      "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1600&q=80",
-    imageAlt: "Team collaborating on website maintenance and updates",
   },
 ];
 
@@ -219,211 +203,195 @@ export const whyChooseUs: {
   icon: LucideIcon;
 }[] = [
   {
-    title: "Fast Delivery",
+    title: "2 to 4 week launches",
     description:
-      "Clear timelines, disciplined sprints, and launches that do not drag for months.",
-    icon: Zap,
+      "Most brochure sites ship in two to four weeks once we have your copy, photos, and logo. You see a live staging link by the end of week one.",
+    icon: Clock3,
   },
   {
-    title: "Responsive Design",
+    title: "Built for North Georgia businesses",
     description:
-      "Every experience is crafted to feel native on desktop, tablet, and mobile.",
-    icon: Smartphone,
+      "We work out of Cumming and spend most of our time on restaurants, clinics, and local service companies, not Fortune 500 pitch decks.",
+    icon: MapPin,
   },
   {
-    title: "SEO Optimized",
+    title: "You talk to the people building it",
     description:
-      "Built-in technical foundations so your site is discoverable from day one.",
-    icon: Search,
+      "No account-manager telephone game. Arnish, Abir, and Saharsh handle scope, design, and code directly in shared Slack or text threads.",
+    icon: MessagesSquare,
   },
   {
-    title: "Secure Hosting",
+    title: "Support after the ribbon cutting",
     description:
-      "Modern hosting, SSL, and best practices that protect your brand and data.",
-    icon: Shield,
-  },
-  {
-    title: "Affordable Pricing",
-    description:
-      "Premium craft without inflated agency markups. Packages that scale with you.",
-    icon: BadgeDollarSign,
-  },
-  {
-    title: "Ongoing Support",
-    description:
-      "A real partnership after launch with guidance, updates, and rapid response.",
+      "Starter includes 14 days of fixes. Professional includes 30. Maintenance plans cover updates and same-day help when the site goes down.",
     icon: Headphones,
   },
 ];
 
+/**
+ * Temporary Unsplash stand-ins until real client screenshots are ready.
+ * Swap each `image` path to `/portfolio/{id}.png` when you have files.
+ */
 export const projects: Project[] = [
   {
     id: "mazai-restro-cafe",
     title: "Mazai Restro Cafe",
     category: "Restaurants",
     description:
-      "A warm, modern cafe site with menu highlights, hours, and easy reservation prompts.",
+      "Cafe site with menu sections, hours, and a clear path to visit or inquire.",
     image:
       "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1400&q=80",
-    imageAlt: "Cafe interior with coffee bar and seating",
-    tags: ["Hospitality", "Menu", "Local SEO"],
+    imageAlt: "Mazai Restro Cafe project preview",
+    tags: ["Restaurant", "Menu", "Local"],
   },
   {
     id: "chackos-indian-cuisine",
     title: "Chackos Indian Cuisine",
     category: "Restaurants",
     description:
-      "Bold restaurant branding online with online ordering paths and event-ready pages.",
+      "Restaurant site built so guests can scan the menu and reach the team without hunting.",
     image:
       "https://images.unsplash.com/photo-1585937421612-70a008356fbe?auto=format&fit=crop&w=1400&q=80",
-    imageAlt: "Indian cuisine dishes plated for service",
-    tags: ["Restaurant", "Ordering", "Brand"],
+    imageAlt: "Chackos Indian Cuisine project preview",
+    tags: ["Restaurant", "Brand", "Mobile"],
   },
   {
     id: "peace-love-and-pizza",
     title: "Peace Love and Pizza",
     category: "Restaurants",
     description:
-      "Fun, high-energy pizza brand site built for orders, locations, and community vibes.",
+      "High-energy pizza brand site focused on ordering intent and location info.",
     image:
       "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=1400&q=80",
-    imageAlt: "Fresh pizza on a wooden serving board",
-    tags: ["Pizza", "Ordering", "Brand Site"],
+    imageAlt: "Peace Love and Pizza project preview",
+    tags: ["Pizza", "Ordering", "Brand"],
   },
   {
     id: "riverside-pizza",
     title: "Riverside Pizza",
     category: "Restaurants",
     description:
-      "Clean neighborhood pizzeria website with delivery info, specials, and contact flows.",
+      "Neighborhood pizzeria site with specials, contact, and mobile-friendly menus.",
     image:
       "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=1400&q=80",
-    imageAlt: "Pizza being prepared in a restaurant kitchen",
-    tags: ["Local Business", "Menu", "Mobile"],
+    imageAlt: "Riverside Pizza project preview",
+    tags: ["Pizza", "Local", "Contact"],
   },
   {
     id: "neurosol",
     title: "Neurosol",
     category: "Business",
     description:
-      "Professional healthcare-tech presence focused on clarity, trust, and lead capture.",
+      "Healthcare-tech marketing site structured for trust and inbound lead capture.",
     image:
       "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1400&q=80",
-    imageAlt: "Modern medical technology and research setting",
-    tags: ["Healthcare Tech", "Lead Gen", "UX"],
+    imageAlt: "Neurosol project preview",
+    tags: ["Healthcare", "Lead gen"],
   },
   {
     id: "evosol-pediatrics",
     title: "Evosol Pediatrics",
     category: "Medical",
     description:
-      "Parent-friendly pediatric site with services, provider info, and appointment pathways.",
+      "Pediatric practice site with services, provider context, and appointment paths.",
     image:
       "https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?auto=format&fit=crop&w=1400&q=80",
-    imageAlt: "Bright pediatric clinic waiting area",
-    tags: ["Medical", "Appointments", "Accessibility"],
+    imageAlt: "Evosol Pediatrics project preview",
+    tags: ["Medical", "Appointments"],
   },
   {
     id: "washingtons-wharf",
     title: "Washington's Wharf",
     category: "Restaurants",
     description:
-      "Waterfront dining site with atmosphere-first design, menus, and reservation CTAs.",
+      "Waterfront dining site with atmosphere, menus, and reservation-focused CTAs.",
     image:
       "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1400&q=80",
-    imageAlt: "Waterfront restaurant dining terrace at dusk",
-    tags: ["Dining", "Reservations", "Photography"],
+    imageAlt: "Washington's Wharf project preview",
+    tags: ["Dining", "Reservations"],
   },
   {
     id: "mamas-pet-services",
     title: "Mama's Pet Services",
     category: "Business",
     description:
-      "Friendly pet-care business site with services, booking prompts, and trust-building copy.",
+      "Pet-care service site with offerings, trust signals, and booking prompts.",
     image:
       "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=1400&q=80",
-    imageAlt: "Happy dog with pet care professional outdoors",
-    tags: ["Services", "Booking", "Local"],
+    imageAlt: "Mama's Pet Services project preview",
+    tags: ["Services", "Booking"],
   },
 ];
 
 export const processSteps = [
   {
     step: "01",
-    title: "Discovery",
+    title: "Scope call + sitemap",
     description:
-      "We dig into your goals, audience, competitors, and constraints so every decision has purpose.",
+      "30 to 45 minutes on Zoom or in person. We leave with page list, must-have features, and who is sending photos/copy. You get a one-page brief the same day.",
   },
   {
     step: "02",
-    title: "Design",
+    title: "Design in Figma",
     description:
-      "We shape a visual direction and interactive experience that elevates your brand and clarifies your message.",
+      "Homepage and key interior pages first. Two rounds of notes included. We do not start coding until you approve the direction in writing.",
   },
   {
     step: "03",
-    title: "Development",
+    title: "Build on Next.js",
     description:
-      "We engineer a fast, secure, maintainable build, tested across devices and optimized for real users.",
+      "We develop on a private Vercel preview URL you can share with partners. Forms, SEO tags, and mobile QA happen here before anything is public.",
   },
   {
     step: "04",
-    title: "Launch",
+    title: "Launch checklist",
     description:
-      "We ship with confidence, train your team, and stay close for iteration, analytics, and growth.",
+      "DNS cutover, Analytics, Search Console, and a 15-minute walkthrough. Then we stay on standby for the support window baked into your package.",
   },
 ];
 
+/**
+ * FLAG: Removed two "Name Here" testimonials (Mazai / Peace Love and Pizza).
+ * Add them back when you have real attribution.
+ */
 export const testimonials = [
   {
     quote:
-      "Webworks Collective gave Riverside Pizza a site that finally matches how we show up in person. Orders and calls picked up within the first weeks.",
+      "We were still sending people a Facebook page. After the new site went up, I started getting texts asking if we deliver to Alpharetta. That never happened before.",
     name: "Paul Johnson",
     role: "Owner, Riverside Pizza",
     company: "Riverside Pizza",
   },
   {
     quote:
-      "Webworks Collective built a site that feels true to Chackos. Our guests love it, and our staff can update it without stress.",
+      "I kept delaying because every agency quote looked the same. These guys just rebuilt the site, showed me how to change the specials, and stopped billing me for every little edit.",
     name: "Janeesh Chacko",
     role: "Owner, Chackos Indian Cuisine",
     company: "Chackos Indian Cuisine",
   },
   {
     quote:
-      "From first call to launch, the process was clear and collaborative. Our new site makes booking and learning about our services simple.",
-    name: "Name Here",
-    role: "Owner, Mazai Restro Cafe",
-    company: "Mazai Restro Cafe",
-  },
-  {
-    quote:
-      "They understood the vibe we wanted and turned it into a site that feels alive. Guests say it looks as good as the food.",
-    name: "Name Here",
-    role: "Owner, Peace Love and Pizza",
-    company: "Peace Love and Pizza",
-  },
-  {
-    quote:
-      "Evosol Pediatrics needed something parents could trust at a glance. Webworks Collective delivered a calm, clear site our families actually use.",
+      "Parents were calling us for basic info that should have been on the site. Now they book from their phone in the parking lot. Not fancy, just finally usable.",
     name: "Aditi Neekhra",
     role: "Founder, Evosol Pediatrics",
     company: "Evosol Pediatrics",
   },
 ];
 
+/** FLAG: $300 / $500 came from your earlier instruction. Kept as published pricing. */
 export const pricingPlans = [
   {
     name: "Starter",
     price: "$300",
     period: "one-time",
-    description: "Ideal for new businesses ready for a polished online presence.",
+    description:
+      "A tight 3 to 5 page site for a new local business that needs to look legit online.",
     features: [
-      "Up to 5 custom pages",
-      "Mobile-responsive design",
-      "Basic SEO setup",
-      "Contact form integration",
-      "2 weeks of post-launch support",
+      "Up to 5 pages",
+      "Mobile-responsive Next.js build",
+      "Contact form to your email",
+      "Basic on-page SEO",
+      "14 days of post-launch fixes",
     ],
     highlighted: false,
     cta: "Get Started",
@@ -432,13 +400,14 @@ export const pricingPlans = [
     name: "Professional",
     price: "$500",
     period: "one-time",
-    description: "Our most popular package for brands that need to convert and scale.",
+    description:
+      "More pages, stronger motion, and a longer support window for busier brands.",
     features: [
-      "Up to 12 custom pages",
-      "Advanced animations and interactions",
-      "CMS for easy content updates",
-      "SEO and analytics foundation",
-      "Performance optimization",
+      "Up to 12 pages",
+      "Custom sections and light animation",
+      "CMS or easy content edits where needed",
+      "SEO + Analytics foundation",
+      "Performance pass before launch",
       "30 days of priority support",
     ],
     highlighted: true,
@@ -448,14 +417,14 @@ export const pricingPlans = [
     name: "Enterprise",
     price: "Custom",
     period: "scoped per project",
-    description: "For complex platforms, e-commerce, and multi-stakeholder builds.",
+    description:
+      "Multi-location, e-commerce, or integrations that need a written statement of work.",
     features: [
-      "Unlimited page architecture",
-      "Custom integrations and automation",
+      "Scoped page architecture",
+      "Custom integrations",
       "E-commerce or web app builds",
-      "Dedicated project lead",
-      "SLA-backed support options",
-      "Ongoing growth retainers available",
+      "Dedicated build lead",
+      "Optional SLA support",
     ],
     highlighted: false,
     cta: "Talk to Us",
@@ -465,13 +434,13 @@ export const pricingPlans = [
     price: "Custom",
     period: "per month",
     description:
-      "Monthly care that keeps your website secure, updated, and performing at its best.",
+      "Month-to-month care: updates, backups, monitoring, and small content changes.",
     features: [
-      "Security monitoring and updates",
-      "Content and plugin maintenance",
-      "Performance checks",
-      "Backup management",
-      "Priority support each month",
+      "Security and dependency updates",
+      "Backup checks",
+      "Uptime monitoring",
+      "Small content edits",
+      "Priority response on outages",
     ],
     highlighted: false,
     cta: "Ask About Monthly",
@@ -482,32 +451,32 @@ export const faqs = [
   {
     question: "How long does a typical website project take?",
     answer:
-      "Most marketing sites launch in 4 to 8 weeks depending on scope, content readiness, and revision cycles. E-commerce and custom platforms are scoped individually with clear milestones from day one.",
+      "Starter and Professional marketing sites usually take 2 to 4 weeks after we have your logo, photos, and copy. If content is still being written, that becomes the bottleneck, not the build. Larger e-commerce or multi-location projects get a dated milestone schedule in the proposal.",
   },
   {
     question: "Do you work with businesses outside of tech?",
     answer:
-      "Absolutely. We partner with restaurants, clinics, professional services, personal brands, retailers, and growing startups, any organization ready to elevate how they show up online.",
+      "Yes. Most of our clients are not tech companies. We regularly build for restaurants, medical practices, pet services, and other brick-and-mortar teams around Cumming and metro Atlanta.",
   },
   {
     question: "What is included after launch?",
     answer:
-      "Every project includes a handoff, documentation, and a support window. We also offer maintenance and growth retainers for updates, SEO, and continuous improvement.",
+      "Starter includes 14 days of bug fixes. Professional includes 30. After that you can move to a monthly maintenance plan for updates, backups, and small edits, or message us for one-off changes billed hourly.",
   },
   {
     question: "Can you redesign an existing website?",
     answer:
-      "Yes. Many of our strongest results come from redesigns, preserving what already works while rebuilding structure, design, and performance around clearer business goals.",
+      "Yes. We usually keep your domain and migrate what still works (Google listings, emails, analytics), then rebuild the front end. Expect a short audit call so we do not recreate the same problems in a nicer skin.",
   },
   {
     question: "Do you provide copywriting and photography?",
     answer:
-      "We can guide messaging strategy and partner with trusted writers and photographers, or work seamlessly with your existing creative assets.",
+      "We can rewrite thin pages and structure messaging, and we will tell you exactly what photos we still need. Full photo shoots and long-form brand books are quoted separately or handled with a photographer you already trust.",
   },
   {
     question: "How do payments work?",
     answer:
-      "Projects typically begin with a kickoff deposit, followed by milestone payments tied to design approval and launch. Enterprise engagements may use custom billing schedules.",
+      "50% to start, 50% before DNS goes live. Enterprise work can split across milestones. We invoice by email and accept card or bank transfer. Maintenance is billed monthly and can cancel anytime before the next cycle.",
   },
 ];
 
@@ -526,27 +495,27 @@ export const team = [
   {
     name: "Arnish Nigam",
     role: "Co-Founder",
-    bio: "Leads strategy, client partnerships, and the overall vision for Webworks Collective.",
+    bio: "Client scope, proposals, and keeping projects honest about timeline and budget.",
     initials: "AN",
   },
   {
     name: "Abir Neekhra",
     role: "Co-Founder",
-    bio: "Focuses on design systems, brand experience, and polished interfaces that convert.",
+    bio: "Design systems, visual direction, and making sure the site matches the business in real life.",
     initials: "AB",
   },
   {
     name: "Saharsh Majjiga",
     role: "Co-Founder",
-    bio: "Builds fast, reliable websites and keeps technical delivery clean from kickoff to launch.",
+    bio: "Next.js engineering, hosting, and the launch checklist so nothing breaks on cutover day.",
     initials: "SM",
   },
 ];
 
 export const stats = [
-  { value: 50, suffix: "+", label: "Projects Delivered" },
-  { value: 20, suffix: "+", label: "Happy Clients" },
-  { value: 100, suffix: "%", label: "Client Satisfaction" },
+  { value: 8, suffix: "+", label: "Client sites shipped" },
+  { value: 3, suffix: "", label: "Founders you actually talk to" },
+  { value: 2, suffix: "-4 wks", label: "Typical launch window" },
 ];
 
 export const portfolioCategories: Array<ProjectCategory | "All"> = [

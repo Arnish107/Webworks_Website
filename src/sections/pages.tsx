@@ -1,7 +1,6 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import {
@@ -20,6 +19,7 @@ import {
   Reveal,
   SectionHeading,
 } from "@/components/ui";
+import { ProjectThumb } from "@/components/project-thumb";
 import {
   cn,
   portfolioCategories,
@@ -40,8 +40,8 @@ export function AboutPage() {
           <Reveal>
             <SectionHeading
               eyebrow="About"
-              title="A collective obsessed with websites that actually work"
-              description="Webworks Collective exists to help ambitious businesses look world-class online and give them digital foundations they can grow on for years."
+              title="A small Cumming studio building sites for local businesses"
+              description="Webworks Collective is Arnish, Abir, and Saharsh. We design and ship Next.js websites for restaurants, clinics, and service companies that need clearer pages and more inbound calls."
             />
           </Reveal>
 
@@ -49,15 +49,15 @@ export function AboutPage() {
             {[
               {
                 title: "Mission",
-                body: "To craft premium websites that clarify brands, earn trust, and turn attention into meaningful business outcomes.",
+                body: "Help North Georgia businesses stop relying on Facebook pages and outdated templates, and get a site their customers can use on a phone in under ten seconds.",
               },
               {
                 title: "Vision",
-                body: "A web where every growing company can afford exceptional design, performance, and strategy, without the traditional agency chaos.",
+                body: "Make professional web work accessible at clear price points ($300 and $500 packages) without the agency theater that pads timelines and invoices.",
               },
               {
                 title: "Our Story",
-                body: "We started as a small team tired of bloated timelines and forgettable templates. Today we partner with founders and local businesses who want digital presence that feels intentional, modern, and built to last.",
+                body: "We started after watching friends pay for slow template sites they could not edit. Now we build, host on Vercel, and stick around for the messy week after launch.",
               },
             ].map((item, index) => (
               <Reveal key={item.title} delay={index * 0.06}>
@@ -97,8 +97,8 @@ export function AboutPage() {
           <Reveal>
             <SectionHeading
               eyebrow="Team"
-              title="Meet the people behind the pixels"
-              description="Three founders building websites that help local brands grow with confidence."
+              title="The three people on your project"
+              description="No separate sales layer. The founders who quote the work also design and ship it."
             />
           </Reveal>
 
@@ -171,8 +171,8 @@ export function ContactPage() {
           <Reveal>
             <SectionHeading
               eyebrow="Contact"
-              title="Tell us about the website you want to build"
-              description="Share a few details and we’ll respond with next steps, timing, and a clear path forward."
+              title="Email us what you need the site to do"
+              description="Include your business name, current website if you have one, and a rough timeline. We reply within one business day."
             />
           </Reveal>
 
@@ -180,11 +180,11 @@ export function ContactPage() {
             <Reveal>
               <aside className="glass h-full rounded-[1.75rem] p-6 md:p-8">
                 <h2 className="font-display text-2xl font-semibold leading-snug pb-0.5">
-                  Let’s talk
+                  Reach the team directly
                 </h2>
                 <p className="mt-3 text-sm leading-relaxed text-muted">
-                  Send all inquiries to our email below, or use the form and we
-                  will get back within one business day.
+                  Prefer email. Use the form if that is easier. Either way it
+                  lands with the founders, not a ticket queue.
                 </p>
 
                 <ul className="mt-8 space-y-5">
@@ -245,8 +245,8 @@ export function ContactPage() {
                         Cumming, GA
                       </p>
                       <p className="mt-2 text-sm text-muted">
-                        Serving local businesses across Georgia and beyond.
-                        Send all inquiries to {siteConfig.email}.
+                        Serving local businesses across North Georgia. Email{" "}
+                        {siteConfig.email} or call (770) 678-1114.
                       </p>
                     </div>
                   </div>
@@ -392,8 +392,8 @@ export function PortfolioPage() {
           <Reveal>
             <SectionHeading
               eyebrow="Portfolio"
-              title="Work that balances beauty with business outcomes"
-              description="Filter by industry and explore how we help brands look sharper and perform better online."
+              title="Client sites we have built"
+              description="Filter by industry. Temporary preview images until final client screenshots are ready."
             />
           </Reveal>
 
@@ -436,14 +436,13 @@ export function PortfolioPage() {
                   className="group glass hover-glow overflow-hidden rounded-3xl"
                 >
                   <div className="relative aspect-[4/3] overflow-hidden">
-                    <Image
+                    <ProjectThumb
                       src={project.image}
                       alt={project.imageAlt}
-                      fill
-                      className="object-cover transition duration-700 group-hover:scale-105"
+                      title={project.title}
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0B1220] via-transparent to-transparent opacity-80" />
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0B1220] via-transparent to-transparent opacity-80" />
                     <span className="absolute left-4 top-4 rounded-full bg-black/40 px-3 py-1 text-xs uppercase tracking-[0.14em] text-white backdrop-blur">
                       {project.category as ProjectCategory}
                     </span>
@@ -489,64 +488,48 @@ export function ServicesPage() {
           <Reveal>
             <SectionHeading
               eyebrow="Services"
-              title="Premium digital services built around your growth"
-              description="Whether you need a brand-new site, a conversion-focused redesign, or systems that keep your business moving, we deliver with clarity and craft."
+              title="What we sell, in plain language"
+              description="Pick a lane or combine them. Most restaurant and clinic projects start with Design + Development, then Maintenance after launch."
             />
           </Reveal>
         </div>
       </section>
 
-      <div className="container-premium space-y-20 pb-10 md:space-y-28">
+      <div className="container-premium space-y-8 pb-10 md:space-y-10">
         {services.map((service, index) => {
           const Icon = service.icon;
-          const reverse = index % 2 === 1;
           return (
-            <Reveal key={service.id}>
+            <Reveal key={service.id} delay={index * 0.03}>
               <article
                 id={service.id}
-                className={`scroll-mt-28 grid items-center gap-8 lg:grid-cols-2 lg:gap-12 ${
-                  reverse ? "lg:[&>*:first-child]:order-2" : ""
-                }`}
+                className="scroll-mt-28 glass rounded-[1.75rem] p-6 md:p-8"
               >
-                <div className="relative aspect-[16/11] overflow-hidden rounded-[1.75rem] border border-white/10">
-                  <Image
-                    src={service.image}
-                    alt={service.imageAlt}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0B1220]/70 to-transparent" />
+                <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/15 text-primary-light">
+                  <Icon className="h-5 w-5" aria-hidden />
                 </div>
-
-                <div className="glass rounded-[1.75rem] p-6 md:p-8">
-                  <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/15 text-primary-light">
-                    <Icon className="h-5 w-5" aria-hidden />
-                  </div>
-                  <h2 className="font-display text-3xl font-semibold">
-                    {service.title}
-                  </h2>
-                  <p className="mt-4 text-muted leading-relaxed">
-                    {service.description}
-                  </p>
-                  <ul className="mt-6 space-y-3">
-                    {service.features.map((feature) => (
-                      <li
-                        key={feature}
-                        className="flex items-start gap-3 text-sm text-muted-strong"
-                      >
-                        <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary-light" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                  <Button asChild className="mt-8">
-                    <Link href="/contact">
-                      Discuss {service.title}
-                      <ArrowRight className="h-4 w-4" />
-                    </Link>
-                  </Button>
-                </div>
+                <h2 className="font-display text-3xl font-semibold leading-snug pb-0.5">
+                  {service.title}
+                </h2>
+                <p className="mt-4 max-w-3xl text-muted leading-relaxed">
+                  {service.description}
+                </p>
+                <ul className="mt-6 grid gap-3 sm:grid-cols-2">
+                  {service.features.map((feature) => (
+                    <li
+                      key={feature}
+                      className="flex items-start gap-3 text-sm text-muted-strong"
+                    >
+                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary-light" />
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+                <Button asChild className="mt-8">
+                  <Link href="/contact">
+                    Discuss {service.title}
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </Button>
               </article>
             </Reveal>
           );
