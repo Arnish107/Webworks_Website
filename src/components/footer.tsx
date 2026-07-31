@@ -43,7 +43,7 @@ const social = [
 
 export function Footer() {
   return (
-    <footer className="relative border-t border-white/8 pt-16 pb-8">
+    <footer className="relative border-t border-white/8 pt-12 pb-[max(2rem,env(safe-area-inset-bottom))] md:pt-16 md:pb-8">
       <div className="container-premium">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           <div>
@@ -60,7 +60,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="focus-ring inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-muted-strong transition hover:border-primary-light/50 hover:text-white"
+                  className="focus-ring inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 text-muted-strong transition hover:border-primary-light/50 hover:text-white"
                 >
                   {icon}
                 </a>
@@ -72,12 +72,12 @@ export function Footer() {
             <h3 className="font-display text-sm uppercase tracking-[0.14em] text-white leading-relaxed pb-0.5">
               Quick Links
             </h3>
-            <ul className="mt-4 space-y-2">
+            <ul className="mt-4 space-y-1">
               {navLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-muted transition hover:text-white"
+                    className="inline-flex min-h-11 items-center text-sm text-muted transition hover:text-white"
                   >
                     {link.label}
                   </Link>
@@ -90,12 +90,12 @@ export function Footer() {
             <h3 className="font-display text-sm uppercase tracking-[0.14em] text-white leading-relaxed pb-0.5">
               Services
             </h3>
-            <ul className="mt-4 space-y-2">
+            <ul className="mt-4 space-y-1">
               {services.slice(0, 6).map((service) => (
                 <li key={service.id}>
                   <Link
                     href={`/services#${service.id}`}
-                    className="text-sm text-muted transition hover:text-white"
+                    className="inline-flex min-h-11 items-center text-sm text-muted transition hover:text-white"
                   >
                     {service.title}
                   </Link>
@@ -108,11 +108,11 @@ export function Footer() {
             <h3 className="font-display text-sm uppercase tracking-[0.14em] text-white leading-relaxed pb-0.5">
               Contact
             </h3>
-            <ul className="mt-4 space-y-3 text-sm text-muted">
+            <ul className="mt-4 space-y-1 text-sm text-muted">
               <li>
                 <a
                   href={`mailto:${siteConfig.email}`}
-                  className="transition hover:text-white break-all"
+                  className="inline-flex min-h-11 items-center transition hover:text-white break-all"
                 >
                   {siteConfig.email}
                 </a>
@@ -120,12 +120,14 @@ export function Footer() {
               <li>
                 <a
                   href={`tel:${siteConfig.phone}`}
-                  className="transition hover:text-white"
+                  className="inline-flex min-h-11 items-center transition hover:text-white"
                 >
                   (770) 678-1114
                 </a>
               </li>
-              <li className="leading-relaxed">Based in {siteConfig.address}</li>
+              <li className="flex min-h-11 items-center leading-relaxed">
+                Based in {siteConfig.address}
+              </li>
             </ul>
           </div>
         </div>

@@ -35,7 +35,7 @@ import { CtaSection } from "@/sections/home";
 export function AboutPage() {
   return (
     <PageTransition>
-      <section className="section-padding pt-32 md:pt-36">
+      <section className="section-padding pt-28 sm:pt-32 md:pt-36">
         <div className="container-premium">
           <Reveal>
             <SectionHeading
@@ -166,7 +166,7 @@ export function ContactPage() {
 
   return (
     <PageTransition>
-      <section className="section-padding pt-32 md:pt-36">
+      <section className="section-padding pt-28 sm:pt-32 md:pt-36">
         <div className="container-premium">
           <Reveal>
             <SectionHeading
@@ -178,7 +178,7 @@ export function ContactPage() {
 
           <div className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
             <Reveal>
-              <aside className="glass h-full rounded-[1.75rem] p-6 md:p-8">
+              <aside className="glass h-full rounded-[1.5rem] p-5 sm:rounded-[1.75rem] sm:p-6 md:p-8">
                 <h2 className="font-display text-2xl font-semibold leading-snug pb-0.5">
                   Reach the team directly
                 </h2>
@@ -257,7 +257,7 @@ export function ContactPage() {
             <Reveal delay={0.08}>
               <form
                 onSubmit={onSubmit}
-                className="glass rounded-[1.75rem] p-6 md:p-8"
+                className="glass rounded-[1.5rem] p-5 sm:rounded-[1.75rem] sm:p-6 md:p-8"
                 noValidate
               >
                 <div className="grid gap-5 sm:grid-cols-2">
@@ -305,15 +305,15 @@ export function ContactPage() {
                     id="message"
                     name="message"
                     required
-                    rows={6}
+                    rows={5}
                     value={form.message}
                     onChange={onChange}
-                    className="w-full rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-white outline-none transition placeholder:text-muted focus:border-primary-light/60 focus:ring-2 focus:ring-primary/30"
+                    className="w-full rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3.5 text-base text-white outline-none transition placeholder:text-muted focus:border-primary-light/60 focus:ring-2 focus:ring-primary/30 sm:text-sm"
                     placeholder="Tell us about your project, goals, and timeline..."
                   />
                 </div>
 
-                <Button type="submit" size="lg" className="mt-6">
+                <Button type="submit" size="lg" className="mt-6 w-full sm:w-auto">
                   Send Message
                   <Send className="h-4 w-4" />
                 </Button>
@@ -369,7 +369,7 @@ function Field({
         onChange={onChange}
         required={required}
         autoComplete={autoComplete}
-        className="w-full rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-white outline-none transition placeholder:text-muted focus:border-primary-light/60 focus:ring-2 focus:ring-primary/30"
+        className="min-h-12 w-full rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3.5 text-base text-white outline-none transition placeholder:text-muted focus:border-primary-light/60 focus:ring-2 focus:ring-primary/30 sm:text-sm"
       />
     </div>
   );
@@ -387,7 +387,7 @@ export function PortfolioPage() {
 
   return (
     <PageTransition>
-      <section className="section-padding pt-32 md:pt-36">
+      <section className="section-padding pt-28 sm:pt-32 md:pt-36">
         <div className="container-premium">
           <Reveal>
             <SectionHeading
@@ -399,7 +399,7 @@ export function PortfolioPage() {
 
           <Reveal>
             <div
-              className="mb-10 flex flex-wrap justify-center gap-2"
+              className="mb-8 flex flex-wrap justify-center gap-2 sm:mb-10"
               role="tablist"
               aria-label="Portfolio categories"
             >
@@ -411,7 +411,7 @@ export function PortfolioPage() {
                   aria-selected={active === category}
                   onClick={() => setActive(category)}
                   className={cn(
-                    "rounded-full px-4 py-2 text-sm transition focus-ring",
+                    "min-h-11 rounded-full px-4 py-2.5 text-sm transition focus-ring",
                     active === category
                       ? "bg-primary text-white"
                       : "glass text-muted-strong hover:text-white"
@@ -482,7 +482,7 @@ export function PortfolioPage() {
 export function ServicesPage() {
   return (
     <PageTransition>
-      <section className="section-padding pt-32 md:pt-36">
+      <section className="section-padding pt-28 sm:pt-32 md:pt-36">
         <div className="container-premium">
           <Reveal>
             <SectionHeading

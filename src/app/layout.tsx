@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Outfit, Syne } from "next/font/google";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
@@ -17,6 +17,13 @@ const syne = Syne({
   variable: "--font-syne",
   display: "swap",
 });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#0B1220",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),

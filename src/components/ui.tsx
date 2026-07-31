@@ -24,10 +24,10 @@ const buttonVariants = cva(
           "border border-white/15 bg-transparent text-white hover:border-primary-light/60 hover:bg-primary/10",
       },
       size: {
-        default: "h-12 px-6",
-        sm: "h-10 px-4 text-xs",
-        lg: "h-14 px-8 text-base",
-        icon: "h-11 w-11",
+        default: "h-12 min-h-12 px-6",
+        sm: "h-11 min-h-11 px-4 text-xs",
+        lg: "h-14 min-h-14 px-6 text-base sm:px-8",
+        icon: "h-11 w-11 min-h-11 min-w-11",
       },
     },
     defaultVariants: { variant: "default", size: "default" },
@@ -122,7 +122,7 @@ export function SectionHeading({
   return (
     <div
       className={cn(
-        "max-w-3xl mb-12 md:mb-16",
+        "max-w-3xl mb-10 md:mb-16",
         align === "center" ? "mx-auto text-center" : "text-left",
         className
       )}
@@ -132,7 +132,7 @@ export function SectionHeading({
           {eyebrow}
         </p>
       ) : null}
-      <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-white leading-[1.2] pb-1 overflow-visible">
+      <h2 className="font-display text-[1.65rem] sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-white leading-[1.2] pb-1 overflow-visible">
         {title}
       </h2>
       {description ? (

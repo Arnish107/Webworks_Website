@@ -120,7 +120,7 @@ function BackToTop() {
     <AnimatePresence>
       {visible ? (
         <motion.div
-          className="fixed bottom-6 right-6 z-50"
+          className="safe-bottom fixed z-50"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 16 }}
@@ -130,7 +130,7 @@ function BackToTop() {
             size="icon"
             aria-label="Back to top"
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="shadow-lg"
+            className="shadow-lg h-12 w-12"
           >
             <ArrowUp className="h-4 w-4" />
           </Button>

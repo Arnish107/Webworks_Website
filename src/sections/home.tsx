@@ -45,17 +45,20 @@ import {
 const floatingSites = [
   {
     label: "Menu + hours",
-    className: "left-[-8%] top-[8%] w-[38%] rotate-[-8deg]",
+    className:
+      "hidden sm:block left-[2%] top-[10%] w-[36%] rotate-[-6deg] md:left-[-4%] md:top-[8%] md:w-[38%] md:rotate-[-8deg]",
     delay: 0.35,
   },
   {
     label: "Mobile booking",
-    className: "right-[-6%] top-[2%] w-[34%] rotate-[7deg]",
+    className:
+      "hidden sm:block right-[2%] top-[4%] w-[32%] rotate-[5deg] md:right-[-4%] md:top-[2%] md:w-[34%] md:rotate-[7deg]",
     delay: 0.5,
   },
   {
     label: "Local SEO",
-    className: "right-[2%] bottom-[6%] w-[36%] rotate-[-4deg]",
+    className:
+      "hidden sm:block right-[4%] bottom-[8%] w-[34%] rotate-[-3deg] md:right-[2%] md:bottom-[6%] md:w-[36%] md:rotate-[-4deg]",
     delay: 0.65,
   },
 ];
@@ -114,7 +117,7 @@ export function HeroSection() {
   return (
     <section
       ref={ref}
-      className="relative overflow-hidden pt-24 pb-10 md:pt-28 md:pb-12 lg:pt-32 lg:pb-16"
+      className="relative overflow-hidden pt-24 pb-8 sm:pb-10 md:pt-28 md:pb-12 lg:pt-32 lg:pb-16"
     >
       <div className="absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(37,99,235,0.28),_transparent_55%)]" />
@@ -123,7 +126,7 @@ export function HeroSection() {
       </div>
 
       <motion.div style={{ y, opacity }} className="container-premium">
-        <div className="grid items-center gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10">
+        <div className="grid items-center gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10">
           <div>
             <motion.p
               className="mb-3 text-xs uppercase tracking-[0.18em] text-primary-light md:text-sm leading-relaxed pb-1"
@@ -135,7 +138,7 @@ export function HeroSection() {
             </motion.p>
 
             <motion.h1
-              className="font-display text-4xl font-semibold leading-[1.15] text-white sm:text-5xl md:text-6xl lg:text-[3.75rem] pb-1 overflow-visible"
+              className="font-display text-[2rem] font-semibold leading-[1.15] text-white sm:text-5xl md:text-6xl lg:text-[3.75rem] pb-1 overflow-visible"
               initial={{ opacity: 0, y: 28 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.08 }}
@@ -145,7 +148,7 @@ export function HeroSection() {
             </motion.h1>
 
             <motion.p
-              className="mt-4 max-w-xl text-base leading-relaxed text-muted md:text-lg"
+              className="mt-4 max-w-xl text-[0.95rem] leading-relaxed text-muted sm:text-base md:text-lg"
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.16 }}
@@ -156,18 +159,18 @@ export function HeroSection() {
             </motion.p>
 
             <motion.div
-              className="mt-6 flex flex-wrap gap-3"
+              className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.24 }}
             >
-              <Button asChild size="lg">
+              <Button asChild size="lg" className="w-full sm:w-auto">
                 <Link href="/contact">
                   Get Started
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </Button>
-              <Button asChild variant="secondary" size="lg">
+              <Button asChild variant="secondary" size="lg" className="w-full sm:w-auto">
                 <Link href="/portfolio">
                   <Play className="h-4 w-4" />
                   View Our Work
@@ -177,23 +180,23 @@ export function HeroSection() {
           </div>
 
           <motion.div
-            className="relative mx-auto w-full max-w-lg lg:max-w-xl"
+            className="relative mx-auto w-full max-w-md sm:max-w-lg lg:max-w-xl"
             initial={{ opacity: 0, scale: 0.94 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.9, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
           >
-            <div className="relative aspect-[4/3]">
+            <div className="relative aspect-[4/3] sm:overflow-visible">
               {floatingSites.map((site) => (
                 <motion.div
                   key={site.label}
-                  className={`absolute overflow-hidden rounded-2xl border border-white/15 bg-[#111827]/90 p-4 shadow-2xl shadow-black/40 ${site.className}`}
+                  className={`absolute overflow-hidden rounded-2xl border border-white/15 bg-[#111827]/90 p-3 shadow-2xl shadow-black/40 sm:p-4 ${site.className}`}
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: site.delay }}
                 >
                   <div className="mb-3 h-2 w-1/2 rounded-full bg-white/10" />
                   <div className="mb-2 h-2 w-3/4 rounded-full bg-white/10" />
-                  <div className="h-16 rounded-lg bg-primary/20" />
+                  <div className="h-14 rounded-lg bg-primary/20 sm:h-16" />
                   <p className="mt-3 text-[11px] uppercase tracking-[0.14em] text-primary-light">
                     {site.label}
                   </p>
@@ -201,22 +204,22 @@ export function HeroSection() {
               ))}
 
               <motion.div
-                className="absolute left-1/2 top-1/2 z-10 w-[72%] -translate-x-1/2 -translate-y-1/2"
+                className="absolute left-1/2 top-1/2 z-10 w-[92%] -translate-x-1/2 -translate-y-1/2 sm:w-[72%]"
                 initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.85, delay: 0.28 }}
               >
-                <div className="rounded-[1.4rem] border border-white/20 bg-[#0f172a]/glass p-2 shadow-[0_30px_80px_rgba(0,0,0,0.45)]">
+                <div className="rounded-[1.25rem] border border-white/20 bg-[#0f172a]/glass p-2 shadow-[0_30px_80px_rgba(0,0,0,0.45)] sm:rounded-[1.4rem]">
                   <div className="mb-2 flex items-center gap-1.5 px-2 pt-1">
                     <span className="h-2 w-2 rounded-full bg-red-400/80" />
                     <span className="h-2 w-2 rounded-full bg-amber-400/80" />
                     <span className="h-2 w-2 rounded-full bg-emerald-400/80" />
                   </div>
-                  <div className="flex aspect-[16/10] flex-col justify-end overflow-hidden rounded-xl bg-gradient-to-br from-[#1e3a8a]/60 to-[#0B1220] p-5">
-                    <p className="text-xs uppercase tracking-[0.16em] text-primary-light">
+                  <div className="flex aspect-[16/10] flex-col justify-end overflow-hidden rounded-xl bg-gradient-to-br from-[#1e3a8a]/60 to-[#0B1220] p-4 sm:p-5">
+                    <p className="text-[11px] uppercase tracking-[0.16em] text-primary-light sm:text-xs">
                       Staging preview
                     </p>
-                    <p className="mt-2 font-display text-xl font-semibold text-white">
+                    <p className="mt-2 font-display text-lg font-semibold text-white sm:text-xl">
                       Your site, live on a private link before launch
                     </p>
                   </div>
@@ -237,11 +240,11 @@ export function TrustedBySection() {
         <p className="mb-5 text-center text-xs uppercase tracking-[0.16em] text-muted leading-relaxed pb-1">
           Clients we have built for
         </p>
-        <ul className="flex flex-wrap items-center justify-center gap-3 md:gap-4">
+        <ul className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 md:gap-4">
           {trustedLogos.map((logo) => (
             <li
               key={logo}
-              className="rounded-full border border-white/8 bg-white/[0.03] px-4 py-2.5 text-sm font-medium text-muted-strong"
+              className="rounded-full border border-white/8 bg-white/[0.03] px-3 py-2 text-xs font-medium text-muted-strong sm:px-4 sm:py-2.5 sm:text-sm"
             >
               {logo}
             </li>
@@ -316,12 +319,12 @@ export function WhyChooseUsSection() {
               return (
                 <Reveal key={item.title} delay={index * 0.04}>
                   <div
-                    className={`relative grid gap-4 md:grid-cols-2 md:gap-10 ${
+                    className={`relative grid gap-4 pl-10 md:grid-cols-2 md:gap-10 md:pl-0 ${
                       isLeft ? "" : "md:[&>*:first-child]:order-2"
                     }`}
                   >
                     <div
-                      className={`glass rounded-3xl p-6 md:p-7 ${
+                      className={`glass rounded-3xl p-5 sm:p-6 md:p-7 ${
                         isLeft ? "md:mr-8" : "md:ml-8"
                       }`}
                     >
@@ -464,9 +467,9 @@ export function TestimonialsSection() {
         </Reveal>
 
         <Reveal>
-          <div className="glass relative mx-auto max-w-4xl overflow-hidden rounded-[2rem] p-8 md:p-12">
-            <Quote className="mb-6 h-8 w-8 text-primary-light/70" aria-hidden />
-            <div className="relative min-h-[180px]">
+          <div className="glass relative mx-auto max-w-4xl overflow-hidden rounded-[1.5rem] p-6 sm:rounded-[2rem] sm:p-8 md:p-12">
+            <Quote className="mb-5 h-7 w-7 text-primary-light/70 sm:mb-6 sm:h-8 sm:w-8" aria-hidden />
+            <div className="relative min-h-[160px] sm:min-h-[180px]">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={active.name}
@@ -475,10 +478,10 @@ export function TestimonialsSection() {
                   exit={{ opacity: 0, y: -18 }}
                   transition={{ duration: 0.4 }}
                 >
-                  <blockquote className="font-display text-xl leading-relaxed text-white md:text-2xl md:leading-relaxed">
+                  <blockquote className="font-display text-lg leading-relaxed text-white sm:text-xl md:text-2xl md:leading-relaxed">
                     “{active.quote}”
                   </blockquote>
-                  <footer className="mt-8">
+                  <footer className="mt-6 sm:mt-8">
                     <p className="font-medium text-white">{active.name}</p>
                     <p className="text-sm text-muted">
                       {active.role}
@@ -488,8 +491,8 @@ export function TestimonialsSection() {
               </AnimatePresence>
             </div>
 
-            <div className="mt-8 flex items-center justify-between">
-              <div className="flex gap-2" role="tablist" aria-label="Testimonials">
+            <div className="mt-6 flex items-center justify-between gap-3 sm:mt-8">
+              <div className="flex gap-1" role="tablist" aria-label="Testimonials">
                 {testimonials.map((item, i) => (
                   <button
                     key={item.name}
@@ -497,13 +500,17 @@ export function TestimonialsSection() {
                     role="tab"
                     aria-selected={i === index}
                     aria-label={`Show testimonial from ${item.name}`}
-                    className={`h-2.5 rounded-full transition-all focus-ring ${
-                      i === index
-                        ? "w-8 bg-primary-light"
-                        : "w-2.5 bg-white/20 hover:bg-white/40"
-                    }`}
+                    className="focus-ring flex h-11 w-11 items-center justify-center rounded-full"
                     onClick={() => setIndex(i)}
-                  />
+                  >
+                    <span
+                      className={`block h-2.5 rounded-full transition-all ${
+                        i === index
+                          ? "w-8 bg-primary-light"
+                          : "w-2.5 bg-white/20"
+                      }`}
+                    />
+                  </button>
                 ))}
               </div>
               <div className="flex gap-2">
@@ -638,28 +645,28 @@ export function CtaSection() {
     <section className="section-padding pt-4">
       <div className="container-premium">
         <Reveal>
-          <div className="glass-strong relative overflow-hidden rounded-[2rem] px-6 py-14 text-center md:px-12 md:py-20">
+          <div className="glass-strong relative overflow-hidden rounded-[1.5rem] px-5 py-12 text-center sm:rounded-[2rem] sm:px-6 sm:py-14 md:px-12 md:py-20">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(59,130,246,0.25),_transparent_55%)]" />
             <div className="relative">
               <p className="text-xs uppercase tracking-[0.22em] text-primary-light">
                 Cumming, GA
               </p>
-              <h2 className="mx-auto mt-4 max-w-3xl font-display text-3xl font-semibold leading-tight text-white md:text-5xl">
+              <h2 className="mx-auto mt-4 max-w-3xl font-display text-[1.65rem] font-semibold leading-tight text-white sm:text-3xl md:text-5xl">
                 Tell us what the site needs to do for your business
               </h2>
-              <p className="mx-auto mt-5 max-w-2xl text-muted md:text-lg">
+              <p className="mx-auto mt-5 max-w-2xl text-sm text-muted sm:text-base md:text-lg">
                 Send a short note about your business, current site (if any), and
                 timeline. We reply within one business day with fit, rough
                 timing, and next steps.
               </p>
-              <div className="mt-8 flex flex-wrap justify-center gap-3">
-                <Button asChild size="lg">
+              <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row sm:flex-wrap">
+                <Button asChild size="lg" className="w-full sm:w-auto">
                   <Link href="/contact">
                     Start a Project
                     <ArrowRight className="h-4 w-4" />
                   </Link>
                 </Button>
-                <Button asChild variant="secondary" size="lg">
+                <Button asChild variant="secondary" size="lg" className="w-full sm:w-auto">
                   <Link href="/services">Explore Services</Link>
                 </Button>
               </div>
