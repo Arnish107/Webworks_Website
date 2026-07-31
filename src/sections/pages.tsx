@@ -137,6 +137,7 @@ type FormState = {
   business: string;
   phone: string;
   message: string;
+  website: string;
 };
 
 const initialState: FormState = {
@@ -145,23 +146,60 @@ const initialState: FormState = {
   business: "",
   phone: "",
   message: "",
+  website: "",
 };
+
+type SubmitStatus = "idle" | "loading" | "success" | "error";
 
 export function ContactPage() {
   const [form, setForm] = useState<FormState>(initialState);
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState<SubmitStatus>("idle");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const onChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = event.target;
     setForm((prev) => ({ ...prev, [name]: value }));
+    if (status === "error") {
+      setStatus("idle");
+      setErrorMessage("");
+    }
   };
 
-  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setSubmitted(true);
-    setForm(initialState);
+    setStatus("loading");
+    setErrorMessage("");
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      const data = (await response.json().catch(() => ({}))) as {
+        error?: string;
+      };
+
+      if (!response.ok) {
+        setStatus("error");
+        setErrorMessage(
+          data.error ||
+            `Something went wrong. Email us at ${siteConfig.email} instead.`
+        );
+        return;
+      }
+
+      setStatus("success");
+      setForm(initialState);
+    } catch {
+      setStatus("error");
+      setErrorMessage(
+        `Network error. Email us at ${siteConfig.email} or call (770) 678-1114.`
+      );
+    }
   };
 
   return (
@@ -257,7 +295,7 @@ export function ContactPage() {
             <Reveal delay={0.08}>
               <form
                 onSubmit={onSubmit}
-                className="glass rounded-[1.5rem] p-5 sm:rounded-[1.75rem] sm:p-6 md:p-8"
+                className="relative glass rounded-[1.5rem] p-5 sm:rounded-[1.75rem] sm:p-6 md:p-8"
                 noValidate
               >
                 <div className="grid gap-5 sm:grid-cols-2">
@@ -268,6 +306,7 @@ export function ContactPage() {
                     onChange={onChange}
                     required
                     autoComplete="name"
+                    disabled={status === "loading"}
                   />
                   <Field
                     label="Email"
@@ -277,6 +316,7 @@ export function ContactPage() {
                     onChange={onChange}
                     required
                     autoComplete="email"
+                    disabled={status === "loading"}
                   />
                   <Field
                     label="Business"
@@ -284,6 +324,7 @@ export function ContactPage() {
                     value={form.business}
                     onChange={onChange}
                     autoComplete="organization"
+                    disabled={status === "loading"}
                   />
                   <Field
                     label="Phone"
@@ -292,8 +333,24 @@ export function ContactPage() {
                     value={form.phone}
                     onChange={onChange}
                     autoComplete="tel"
+                    disabled={status === "loading"}
                   />
                 </div>
+
+                {/* Honeypot — leave empty */}
+                <div className="absolute -left-[9999px] h-0 w-0 overflow-hidden" aria-hidden>
+                  <label htmlFor="website">Website</label>
+                  <input
+                    id="website"
+                    name="website"
+                    type="text"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    value={form.website}
+                    onChange={onChange}
+                  />
+                </div>
+
                 <div className="mt-5">
                   <label
                     htmlFor="message"
@@ -308,24 +365,40 @@ export function ContactPage() {
                     rows={5}
                     value={form.message}
                     onChange={onChange}
-                    className="w-full rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3.5 text-base text-white outline-none transition placeholder:text-muted focus:border-primary-light/60 focus:ring-2 focus:ring-primary/30 sm:text-sm"
+                    disabled={status === "loading"}
+                    className="w-full rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3.5 text-base text-white outline-none transition placeholder:text-muted focus:border-primary-light/60 focus:ring-2 focus:ring-primary/30 disabled:opacity-60 sm:text-sm"
                     placeholder="Tell us about your project, goals, and timeline..."
                   />
                 </div>
 
-                <Button type="submit" size="lg" className="mt-6 w-full sm:w-auto">
-                  Send Message
+                <Button
+                  type="submit"
+                  size="lg"
+                  className="mt-6 w-full sm:w-auto"
+                  disabled={status === "loading"}
+                >
+                  {status === "loading" ? "Sending..." : "Send Message"}
                   <Send className="h-4 w-4" />
                 </Button>
 
-                {submitted ? (
+                {status === "success" ? (
                   <p
                     className="mt-4 text-sm text-emerald-300"
                     role="status"
                     aria-live="polite"
                   >
-                    Thanks for reaching out. We’ve received your message and
-                    will reply shortly.
+                    Thanks for reaching out. Your message was sent to{" "}
+                    {siteConfig.email}. We’ll reply within one business day.
+                  </p>
+                ) : null}
+
+                {status === "error" ? (
+                  <p
+                    className="mt-4 text-sm text-red-300"
+                    role="alert"
+                    aria-live="assertive"
+                  >
+                    {errorMessage}
                   </p>
                 ) : null}
               </form>
@@ -345,6 +418,7 @@ function Field({
   type = "text",
   required,
   autoComplete,
+  disabled,
 }: {
   label: string;
   name: keyof FormState;
@@ -355,6 +429,7 @@ function Field({
   type?: string;
   required?: boolean;
   autoComplete?: string;
+  disabled?: boolean;
 }) {
   return (
     <div>
@@ -369,7 +444,8 @@ function Field({
         onChange={onChange}
         required={required}
         autoComplete={autoComplete}
-        className="min-h-12 w-full rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3.5 text-base text-white outline-none transition placeholder:text-muted focus:border-primary-light/60 focus:ring-2 focus:ring-primary/30 sm:text-sm"
+        disabled={disabled}
+        className="min-h-12 w-full rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3.5 text-base text-white outline-none transition placeholder:text-muted focus:border-primary-light/60 focus:ring-2 focus:ring-primary/30 disabled:opacity-60 sm:text-sm"
       />
     </div>
   );
