@@ -260,11 +260,11 @@ export const projects: Project[] = [
     title: "Peace Love and Pizza",
     category: "Restaurants",
     description:
-      "High-energy pizza brand site focused on ordering intent and location info.",
+      "Site for Paul Johnson's pizza brand: ordering intent, locations, and a clear path to visit.",
     image:
       "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=1400&q=80",
     imageAlt: "Peace Love and Pizza project preview",
-    tags: ["Pizza", "Ordering", "Brand"],
+    tags: ["Pizza", "Ordering", "Brand", "Paul Johnson"],
   },
   {
     id: "riverside-pizza",
@@ -351,16 +351,16 @@ export const processSteps = [
 ];
 
 /**
- * FLAG: Removed two "Name Here" testimonials (Mazai / Peace Love and Pizza).
- * Add them back when you have real attribution.
+ * FLAG: Removed a "Name Here" testimonial (Mazai). Add it back when you have real attribution.
+ * Paul Johnson = Peace Love and Pizza (not Riverside Pizza).
  */
 export const testimonials = [
   {
     quote:
       "We were still sending people a Facebook page. After the new site went up, I started getting texts asking if we deliver to Alpharetta. That never happened before.",
     name: "Paul Johnson",
-    role: "Owner, Riverside Pizza",
-    company: "Riverside Pizza",
+    role: "Owner, Peace Love and Pizza",
+    company: "Peace Love and Pizza",
   },
   {
     quote:
