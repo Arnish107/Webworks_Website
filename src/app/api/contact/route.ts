@@ -105,7 +105,7 @@ export async function POST(request: Request) {
   `;
 
   try {
-    const { error } = await resend.emails.send({
+    const { data, error } = await resend.emails.send({
       from,
       to: [to],
       replyTo: email,
@@ -116,17 +116,31 @@ export async function POST(request: Request) {
 
     if (error) {
       console.error("Resend error:", error);
+      const detail =
+        typeof error === "object" && error && "message" in error
+          ? String((error as { message?: string }).message)
+          : "Could not send your message.";
+
+      // Surface Resend's message so misconfig (wrong recipient / unverified domain) is obvious.
       return NextResponse.json(
-        { error: "Could not send your message. Please try again or email us directly." },
+        {
+          error: detail,
+          code:
+            typeof error === "object" && error && "name" in error
+              ? String((error as { name?: string }).name)
+              : undefined,
+        },
         { status: 502 }
       );
     }
 
-    return NextResponse.json({ ok: true });
+    return NextResponse.json({ ok: true, id: data?.id ?? null });
   } catch (error) {
     console.error("Contact API error:", error);
+    const detail =
+      error instanceof Error ? error.message : "Could not send your message.";
     return NextResponse.json(
-      { error: "Could not send your message. Please try again or email us directly." },
+      { error: `${detail} Please try again or email us directly.` },
       { status: 500 }
     );
   }

@@ -387,8 +387,8 @@ export function ContactPage() {
                     role="status"
                     aria-live="polite"
                   >
-                    Thanks for reaching out. Your message was sent to{" "}
-                    {siteConfig.email}. We’ll reply within one business day.
+                    Thanks for reaching out. Your message was sent. We’ll reply
+                    within one business day.
                   </p>
                 ) : null}
 

@@ -33,18 +33,25 @@ Open [http://localhost:3000](http://localhost:3000).
 
 The `/contact` form posts to `/api/contact` and emails you via [Resend](https://resend.com).
 
-1. Create a free Resend account (sign up with `webworkscollective887@gmail.com` so test sends can reach that inbox).
+1. Create a free Resend account.
 2. Create an API key at [resend.com/api-keys](https://resend.com/api-keys).
 3. Copy `.env.example` to `.env.local` and set:
 
 ```bash
 RESEND_API_KEY=re_xxxxxxxx
-CONTACT_TO_EMAIL=webworkscollective887@gmail.com
+CONTACT_TO_EMAIL=your-resend-account-email@gmail.com
 ```
 
-4. On Vercel: **Project → Settings → Environment Variables** → add the same `RESEND_API_KEY` (and optional `CONTACT_TO_EMAIL`) for Production + Preview, then redeploy.
+Until you verify a domain at [resend.com/domains](https://resend.com/domains), Resend **only** delivers to the email you signed up with (not a different business inbox).
 
-Until you verify a custom domain in Resend, emails send from `onboarding@resend.dev` and can only be delivered to the Resend account email.
+4. On Vercel: **Project → Settings → Environment Variables** → add `RESEND_API_KEY` and `CONTACT_TO_EMAIL` for Production + Preview, then redeploy.
+
+After you verify a domain (e.g. `webworkscollective.com`), set:
+
+```bash
+CONTACT_FROM_EMAIL=Webworks Collective <hello@yourdomain.com>
+CONTACT_TO_EMAIL=webworkscollective887@gmail.com
+```
 
 ## Deploy (Vercel)
 
