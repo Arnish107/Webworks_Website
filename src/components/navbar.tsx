@@ -11,15 +11,7 @@ import { Logo } from "@/components/logo";
 
 export function Navbar() {
   const pathname = usePathname();
-  const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   useEffect(() => {
     setOpen(false);
@@ -43,19 +35,10 @@ export function Navbar() {
   }, [open]);
 
   return (
-    <header
-      className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-all duration-300",
-        "pt-[env(safe-area-inset-top)]",
-        scrolled ? "py-2" : "py-2.5 md:py-3"
-      )}
-    >
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#0B1220] pt-[env(safe-area-inset-top)]">
       <div className="container-premium">
         <nav
-          className={cn(
-            "flex items-center justify-between rounded-full px-3 py-2.5 md:px-5 md:py-3 transition-all duration-300",
-            scrolled ? "glass shadow-lg shadow-black/20" : "bg-transparent"
-          )}
+          className="flex items-center justify-between py-3 md:py-3.5"
           aria-label="Primary"
         >
           <Logo priority />

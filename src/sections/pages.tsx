@@ -456,8 +456,17 @@ export function PortfolioPage() {
   );
 
   const filtered = useMemo(() => {
-    if (active === "All") return projects;
-    return projects.filter((project) => project.category === active);
+    const list =
+      active === "All"
+        ? projects
+        : projects.filter((project) => project.category === active);
+    return list.filter((project) => !project.comingSoon);
+  }, [active]);
+
+  const comingSoon = useMemo(() => {
+    const list = projects.filter((project) => project.comingSoon);
+    if (active === "All") return list;
+    return list.filter((project) => project.category === active);
   }, [active]);
 
   return (
@@ -511,26 +520,14 @@ export function PortfolioPage() {
                   className="group glass hover-glow overflow-hidden rounded-3xl"
                 >
                   <div className="relative aspect-[4/3] overflow-hidden">
-                    {project.comingSoon ? (
-                      <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#0f172a] to-[#1e3a8a]/80">
-                        <p className="relative z-10 font-display text-lg font-semibold tracking-wide text-white">
-                          Coming soon
-                        </p>
-                      </div>
-                    ) : (
-                      <>
-                        <ProjectThumb
-                          src={project.image}
-                          alt={project.imageAlt}
-                          title={project.title}
-                        />
-                        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0B1220] via-transparent to-transparent opacity-80" />
-                      </>
-                    )}
-                    <span className="absolute left-4 top-4 rounded-full bg-black/40 px-3 py-1 text-xs uppercase tracking-[0.14em] text-white backdrop-blur">
-                      {project.comingSoon
-                        ? "Coming soon"
-                        : (project.category as ProjectCategory)}
+                    <ProjectThumb
+                      src={project.image}
+                      alt={project.imageAlt}
+                      title={project.title}
+                    />
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0B1220] via-transparent to-transparent opacity-80" />
+                    <span className="absolute left-4 top-4 rounded-full bg-[#0B1220] px-3 py-1 text-xs uppercase tracking-[0.14em] text-white">
+                      {project.category as ProjectCategory}
                     </span>
                   </div>
                   <div className="p-5 md:p-6">
@@ -553,6 +550,56 @@ export function PortfolioPage() {
               ))}
             </AnimatePresence>
           </motion.div>
+
+          {comingSoon.length > 0 ? (
+            <div className="mt-16 md:mt-20">
+              <h2 className="font-display text-2xl font-semibold text-white sm:text-3xl">
+                Coming soon
+              </h2>
+              <p className="mt-3 max-w-2xl text-sm text-muted sm:text-base">
+                These sites are in progress. Photos stay up while the builds finish.
+              </p>
+              <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                {comingSoon.map((project) => (
+                  <article
+                    key={project.id}
+                    className="glass hover-glow overflow-hidden rounded-3xl"
+                  >
+                    <div className="relative aspect-[4/3] overflow-hidden">
+                      <ProjectThumb
+                        src={project.image}
+                        alt={project.imageAlt}
+                        title={project.title}
+                      />
+                      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#0B1220] to-transparent" />
+                      <p className="absolute inset-x-0 top-0 bg-[#0B1220] px-4 py-2.5 text-center text-xs font-semibold uppercase tracking-[0.16em] text-white">
+                        Coming soon
+                      </p>
+                    </div>
+                    <div className="p-5 md:p-6">
+                      <p className="text-xs uppercase tracking-[0.18em] text-primary-light">
+                        {project.category}
+                      </p>
+                      <h3 className="mt-2 font-display text-xl font-semibold">
+                        {project.title}
+                      </h3>
+                      <p className="mt-2 text-sm text-muted">{project.description}</p>
+                      <div className="mt-4 flex flex-wrap gap-2">
+                        {project.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="rounded-full border border-white/10 px-2.5 py-1 text-[11px] text-muted"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
+          ) : null}
         </div>
       </section>
       <CtaSection />

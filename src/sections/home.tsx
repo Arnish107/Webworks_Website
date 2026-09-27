@@ -342,7 +342,7 @@ export function WhyChooseUsSection() {
 }
 
 export function PortfolioSection() {
-  const featured = projects.slice(0, 6);
+  const featured = projects.filter((project) => !project.comingSoon).slice(0, 6);
 
   return (
     <section className="section-padding" id="work">
@@ -360,22 +360,12 @@ export function PortfolioSection() {
             <Reveal key={project.id} delay={index * 0.05}>
               <article className="group glass hover-glow overflow-hidden rounded-3xl">
                 <div className="relative aspect-[4/3] overflow-hidden">
-                  {project.comingSoon ? (
-                    <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#0f172a] to-[#1e3a8a]/80">
-                      <p className="relative z-10 font-display text-lg font-semibold tracking-wide text-white">
-                        Coming soon
-                      </p>
-                    </div>
-                  ) : (
-                    <>
-                      <ProjectThumb
-                        src={project.image}
-                        alt={project.imageAlt}
-                        title={project.title}
-                      />
-                      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0B1220] via-transparent to-transparent opacity-80" />
-                    </>
-                  )}
+                  <ProjectThumb
+                    src={project.image}
+                    alt={project.imageAlt}
+                    title={project.title}
+                  />
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0B1220] via-transparent to-transparent opacity-80" />
                 </div>
                 <div className="p-5 md:p-6">
                   <p className="text-xs uppercase tracking-[0.18em] text-primary-light">
