@@ -11,15 +11,12 @@ type LogoProps = {
 export function Logo({ className, priority = false, href = "/" }: LogoProps) {
   const image = (
     <Image
-      src="/logo.png"
-      alt="Webworks Collective"
-      width={88}
-      height={88}
+      src="/logo-wordmark.png"
+      alt="Webworks"
+      width={858}
+      height={158}
       priority={priority}
-      className={cn(
-        "h-10 w-10 rounded-full object-cover md:h-11 md:w-11",
-        className
-      )}
+      className={cn("h-8 w-auto md:h-9", className)}
     />
   );
 
@@ -28,8 +25,8 @@ export function Logo({ className, priority = false, href = "/" }: LogoProps) {
   return (
     <Link
       href={href}
-      className="focus-ring inline-flex shrink-0 items-center rounded-full"
-      aria-label="Webworks Collective home"
+      className="focus-ring inline-flex shrink-0 items-center rounded-lg"
+      aria-label="Webworks home"
     >
       {image}
     </Link>

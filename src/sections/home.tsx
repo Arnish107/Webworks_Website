@@ -36,7 +36,6 @@ import {
   processSteps,
   projects,
   services,
-  siteConfig,
   testimonials,
   trustedLogos,
   whyChooseUs,
@@ -128,15 +127,6 @@ export function HeroSection() {
       <motion.div style={{ y, opacity }} className="container-premium">
         <div className="grid items-center gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10">
           <div>
-            <motion.p
-              className="mb-3 text-xs uppercase tracking-[0.18em] text-primary-light md:text-sm leading-relaxed pb-1"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              {siteConfig.name}
-            </motion.p>
-
             <motion.h1
               className="font-display text-[2rem] font-semibold leading-[1.15] text-white sm:text-5xl md:text-6xl lg:text-[3.75rem] pb-1 overflow-visible"
               initial={{ opacity: 0, y: 28 }}

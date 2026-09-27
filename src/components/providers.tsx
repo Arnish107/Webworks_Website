@@ -36,21 +36,13 @@ function LoadingScreen() {
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/logo.png"
-                alt=""
-                className="mx-auto h-24 w-24 rounded-full object-cover md:h-28 md:w-28"
+                src="/logo-wordmark.png"
+                alt="Webworks"
+                className="mx-auto h-16 w-auto sm:h-20"
               />
             </motion.div>
-            <motion.p
-              className="mt-5 font-display text-xl font-semibold tracking-tight text-white md:text-2xl leading-snug"
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.25 }}
-            >
-              Webworks Collective
-            </motion.p>
             <motion.div
-              className="mx-auto mt-6 h-[2px] w-40 overflow-hidden rounded-full bg-white/10"
+              className="mx-auto mt-8 h-[2px] w-40 overflow-hidden rounded-full bg-white/10"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.35 }}
