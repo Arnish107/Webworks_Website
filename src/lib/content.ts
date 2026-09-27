@@ -20,14 +20,15 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 /**
- * Live host for canonical / Open Graph. Override with NEXT_PUBLIC_SITE_URL if needed.
+ * Live host for canonical / Open Graph. The apex domain redirects to www.
+ * Override with NEXT_PUBLIC_SITE_URL if needed.
  */
 export const siteConfig = {
   name: "Webworks Collective",
   tagline: "Websites for local businesses that need more calls, not more fluff",
   description:
     "Webworks Collective is a Cumming, GA web studio building sites for restaurants, clinics, and local service businesses. Next.js builds, clear pricing, and support after launch.",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://webworks-website.vercel.app",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.webworkscollective.com",
   email: "webworkscollective887@gmail.com",
   phone: "7706781114",
   address: "Cumming, GA",
