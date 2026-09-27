@@ -360,12 +360,22 @@ export function PortfolioSection() {
             <Reveal key={project.id} delay={index * 0.05}>
               <article className="group glass hover-glow overflow-hidden rounded-3xl">
                 <div className="relative aspect-[4/3] overflow-hidden">
-                  <ProjectThumb
-                    src={project.image}
-                    alt={project.imageAlt}
-                    title={project.title}
-                  />
-                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0B1220] via-transparent to-transparent opacity-80" />
+                  {project.comingSoon ? (
+                    <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#0f172a] to-[#1e3a8a]/80">
+                      <p className="relative z-10 font-display text-lg font-semibold tracking-wide text-white">
+                        Coming soon
+                      </p>
+                    </div>
+                  ) : (
+                    <>
+                      <ProjectThumb
+                        src={project.image}
+                        alt={project.imageAlt}
+                        title={project.title}
+                      />
+                      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0B1220] via-transparent to-transparent opacity-80" />
+                    </>
+                  )}
                 </div>
                 <div className="p-5 md:p-6">
                   <p className="text-xs uppercase tracking-[0.18em] text-primary-light">
@@ -377,12 +387,6 @@ export function PortfolioSection() {
                   <p className="mt-2 text-sm text-muted line-clamp-2">
                     {project.description}
                   </p>
-                  <Button asChild variant="ghost" className="mt-4 px-0">
-                    <Link href="/portfolio">
-                      View Project
-                      <ArrowUpRight className="h-4 w-4" />
-                    </Link>
-                  </Button>
                 </div>
               </article>
             </Reveal>

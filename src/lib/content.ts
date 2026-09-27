@@ -96,6 +96,7 @@ export type Project = {
   imageAlt: string;
   tags: string[];
   liveUrl?: string;
+  comingSoon?: boolean;
 };
 
 export const services: Service[] = [
@@ -303,23 +304,21 @@ export const projects: Project[] = [
     id: "washingtons-wharf",
     title: "Washington's Wharf",
     category: "Restaurants",
-    description:
-      "Waterfront dining site with atmosphere, menus, and reservation-focused CTAs.",
-    image:
-      "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1400&q=80",
-    imageAlt: "Washington's Wharf project preview",
+    description: "Waterfront dining site. Preview coming soon.",
+    image: "",
+    imageAlt: "Washington's Wharf, coming soon",
     tags: ["Dining", "Reservations"],
+    comingSoon: true,
   },
   {
     id: "mamas-pet-services",
     title: "Mama's Pet Services",
     category: "Business",
-    description:
-      "Pet-care service site with offerings, trust signals, and booking prompts.",
-    image:
-      "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=1400&q=80",
-    imageAlt: "Mama's Pet Services project preview",
+    description: "Pet-care service site. Preview coming soon.",
+    image: "",
+    imageAlt: "Mama's Pet Services, coming soon",
     tags: ["Services", "Booking"],
+    comingSoon: true,
   },
 ];
 

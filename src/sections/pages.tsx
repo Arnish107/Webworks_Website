@@ -5,7 +5,6 @@ import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   ArrowRight,
-  ArrowUpRight,
   Check,
   Mail,
   MapPin,
@@ -512,14 +511,26 @@ export function PortfolioPage() {
                   className="group glass hover-glow overflow-hidden rounded-3xl"
                 >
                   <div className="relative aspect-[4/3] overflow-hidden">
-                    <ProjectThumb
-                      src={project.image}
-                      alt={project.imageAlt}
-                      title={project.title}
-                    />
-                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0B1220] via-transparent to-transparent opacity-80" />
+                    {project.comingSoon ? (
+                      <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#0f172a] to-[#1e3a8a]/80">
+                        <p className="relative z-10 font-display text-lg font-semibold tracking-wide text-white">
+                          Coming soon
+                        </p>
+                      </div>
+                    ) : (
+                      <>
+                        <ProjectThumb
+                          src={project.image}
+                          alt={project.imageAlt}
+                          title={project.title}
+                        />
+                        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0B1220] via-transparent to-transparent opacity-80" />
+                      </>
+                    )}
                     <span className="absolute left-4 top-4 rounded-full bg-black/40 px-3 py-1 text-xs uppercase tracking-[0.14em] text-white backdrop-blur">
-                      {project.category as ProjectCategory}
+                      {project.comingSoon
+                        ? "Coming soon"
+                        : (project.category as ProjectCategory)}
                     </span>
                   </div>
                   <div className="p-5 md:p-6">
@@ -537,12 +548,6 @@ export function PortfolioPage() {
                         </span>
                       ))}
                     </div>
-                    <Button asChild variant="ghost" className="mt-4 px-0">
-                      <Link href="/contact">
-                        View Project
-                        <ArrowUpRight className="h-4 w-4" />
-                      </Link>
-                    </Button>
                   </div>
                 </motion.article>
               ))}
